@@ -21,11 +21,20 @@ import picocli.CommandLine
 
 @CommandLine.Command(
         name = 'crafter-cli', usageHelpAutoWidth = true,
+        versionProvider = VersionProvider.class, mixinStandardHelpOptions = true,
         subcommands = [CommandLine.HelpCommand, AddEnvironment, AddRemote, CreateSite, ListRemotes, SyncFrom, SyncTo])
 class Main {
 
     static def main(args) {
         System.exit(new CommandLine(new Main()).execute(args))
+    }
+
+    static class VersionProvider implements CommandLine.IVersionProvider {
+
+        String[] getVersion() throws Exception {
+            return [ getClass().getResource('version.txt').text ]
+        }
+
     }
 
 }

@@ -22,18 +22,18 @@
     <formats>
         <format>zip</format>
     </formats>
-    <baseDirectory>target/appassembler</baseDirectory>
+    <baseDirectory>${project.build.directory}/${project.artifactId}</baseDirectory>
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <directory>target/appassembler/repo</directory>
+            <directory>${project.build.directory}/${project.artifactId}/repo</directory>
             <outputDirectory>repo</outputDirectory>
             <excludes>
                 <exclude>maven-metadata-appassembler.xml</exclude>
             </excludes>
         </fileSet>
         <fileSet>
-            <directory>target/appassembler/bin</directory>
+            <directory>${project.build.directory}/${project.artifactId}/bin</directory>
             <outputDirectory>bin</outputDirectory>
         </fileSet>
     </fileSets>
