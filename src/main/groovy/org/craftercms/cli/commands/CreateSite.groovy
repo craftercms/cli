@@ -71,6 +71,7 @@ class CreateSite extends AbstractCommand {
         ]
         if (gitOptions) {
             params.create_option = gitOptions.createOption
+            params.use_remote = gitOptions.remote
 
             if (gitOptions.remoteName) {
                 params.remote_name = gitOptions.remoteName
