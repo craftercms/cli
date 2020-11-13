@@ -46,7 +46,7 @@ class AddRemote extends AbstractCommand {
             params.remoteUsername = authAware.username
         }
         if (authAware.password) {
-            params.remotePassword = authAware.passwordes
+            params.remotePassword = authAware.password
         }
         if (authAware.token) {
             params.remoteToken = authAware.token

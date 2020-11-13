@@ -45,7 +45,7 @@ class GitOptions {
     def getCreateOption() {
         if (!createOptions) {
             return 'none'
-        } else if (createOptions.cloneOptions) {
+        } else if (createOptions.clone) {
             return 'clone'
         } else {
             return 'push'
