@@ -1,3 +1,5 @@
+![build status](https://travis-ci.com/craftercms/crafter-cli.svg?branch=develop)
+
 # Crafter CLI
 Commandline interface to Crafter CMS
 
