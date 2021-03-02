@@ -22,7 +22,8 @@ import picocli.CommandLine
 @CommandLine.Command(
         name = 'crafter-cli', usageHelpAutoWidth = true,
         versionProvider = VersionProvider.class, mixinStandardHelpOptions = true,
-        subcommands = [CommandLine.HelpCommand, AddEnvironment, AddRemote, CreateSite, ListRemotes, SyncFrom, SyncTo])
+        subcommands = [CommandLine.HelpCommand, AddEnvironment, AddRemote, CreateSite, ListRemotes, SyncFrom, SyncTo,
+                        ListSites])
 class Main {
 
     static def main(args) {
