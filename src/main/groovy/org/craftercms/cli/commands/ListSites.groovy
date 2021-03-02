@@ -14,28 +14,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.craftercms.cli
+package org.craftercms.cli.commands
 
-import org.craftercms.cli.commands.*
 import picocli.CommandLine
 
-@CommandLine.Command(
-        name = 'crafter-cli', usageHelpAutoWidth = true,
-        versionProvider = VersionProvider.class, mixinStandardHelpOptions = true,
-        subcommands = [CommandLine.HelpCommand, AddEnvironment, AddRemote, CreateSite, ListRemotes, SyncFrom, SyncTo,
-                        ListSites])
-class Main {
+@CommandLine.Command(name = 'list-sites', description = 'List the sites that the current user can access')
+class ListSites extends AbstractCommand {
 
-    static def main(args) {
-        System.exit(new CommandLine(new Main()).execute(args))
-    }
-
-    static class VersionProvider implements CommandLine.IVersionProvider {
-
-        String[] getVersion() throws Exception {
-            return [ getClass().getResource('version.txt').text ]
+    def run(client) {
+        client.get {
+            request.uri.path = '/studio/api/2/users/me/sites.json'
+        }.with {
+            if (sites) {
+                sites.each {
+                    println " ${it.name} (${it.siteId})"
+                }
+            } else {
+                println "There are no sites"
+            }
         }
-
     }
 
 }

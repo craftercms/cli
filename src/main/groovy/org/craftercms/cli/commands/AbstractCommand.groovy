@@ -27,6 +27,8 @@ import static groovyx.net.http.HttpBuilder.configure
 
 abstract class AbstractCommand implements Runnable {
 
+    static final def AUTH_HEADER = "Authorization"
+
     @CommandLine.Option(names = ['--config'], description = 'The folder to store configurations',
             paramLabel = 'path')
     File configFolder = new File(System.getProperty('user.home'))
@@ -44,7 +46,7 @@ abstract class AbstractCommand implements Runnable {
         additionalValidations()
         try {
             def config = loadConfig()
-            def client = login(config)
+            def client = getClient(config)
             run(client)
         } catch (HttpException e) {
             println "Status Code ${e.statusCode}"
@@ -75,36 +77,28 @@ abstract class AbstractCommand implements Runnable {
 
     }
 
-    def getClient(url) {
+    def getClient(config) {
         return configure {
-            request.uri = url
+            request.uri = config.url
             request.contentType = JSON[0]
-            request.cookie('XSRF-TOKEN', 'CRAFTER_CLI_TOKEN')
-            request.headers['X-XSRF-TOKEN'] = 'CRAFTER_CLI_TOKEN'
-
+            if (config.token) {
+                request.headers[AUTH_HEADER] = "Bearer ${config.token}"
+            } else {
+                // This is the right away according to docs, but it doesn't work...
+                // request.auth.basic(username, password)
+                request.headers[AUTH_HEADER] = "Basic ${"${config.username}:${config.password}".bytes.encodeBase64()}"
+            }
         }
     }
 
-    def login(config) {
-        def client = getClient(config.url)
-        client.post {
-            request.uri.path = "/studio/api/1/services/api/1/security/login.json"
-            request.body = [
-                    username: config.username,
-                    password: config.password
-            ]
-        }
-        client
-    }
-
-    def saveConfig(url, username, password) {
+    def saveConfig(config) {
         def configFile = new File("$configFolder/.crafter${profile ? "/$profile" : ''}/${environment}")
         if (configFile.exists()) {
             throw new IllegalArgumentException('Environment already exists')
         }
         new FileTreeBuilder(configFolder)
                 .dir(".crafter${profile ? "/$profile" : ''}") {
-                    file(environment, JsonOutput.toJson([url: url, username: username, password: password]))
+                    file(environment, JsonOutput.toJson(config))
                 }
     }
 
