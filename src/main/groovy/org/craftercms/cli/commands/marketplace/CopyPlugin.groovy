@@ -20,13 +20,13 @@ import org.craftercms.cli.commands.AbstractCommand
 import org.craftercms.cli.options.SiteOptions
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'copy-plugin', description = 'Copies a plugin from a local folder')
+@CommandLine.Command(name = 'copy-plugin', description = 'Copies a plugin from a Studio local folder into a site')
 class CopyPlugin extends AbstractCommand {
 
     @CommandLine.Mixin
     SiteOptions siteOptions
 
-    @CommandLine.Option(names = '--path', description = 'The path for the plugin folder', required = true)
+    @CommandLine.Option(names = '--path', description = 'The plugin source path (must be a local folder to Crafter Studio)', required = true)
     String path
 
     def run(client) {
