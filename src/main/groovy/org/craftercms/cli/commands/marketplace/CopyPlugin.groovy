@@ -17,8 +17,6 @@
 package org.craftercms.cli.commands.marketplace
 
 import org.craftercms.cli.commands.AbstractCommand
-import org.craftercms.cli.options.AuthOptions
-import org.craftercms.cli.options.GitOptions
 import org.craftercms.cli.options.SiteOptions
 import picocli.CommandLine
 
