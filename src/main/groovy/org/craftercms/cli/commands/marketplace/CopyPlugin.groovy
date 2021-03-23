@@ -14,28 +14,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.craftercms.cli.commands
+package org.craftercms.cli.commands.marketplace
 
+import org.craftercms.cli.commands.AbstractCommand
+import org.craftercms.cli.options.AuthOptions
+import org.craftercms.cli.options.GitOptions
+import org.craftercms.cli.options.SiteOptions
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'sync-from', description = 'Sync the content of a site from a remote repository')
-class SyncFrom extends AbstractSyncCommand {
+@CommandLine.Command(name = 'copy-plugin', description = 'Copies a plugin from a local folder')
+class CopyPlugin extends AbstractCommand {
 
-    @CommandLine.Option(names = ['-m', '--mergeStrategy'], description = 'The merge strategy to use', paramLabel = 'none|ours|theirs')
-    String mergeStrategy
+    @CommandLine.Mixin
+    SiteOptions siteOptions
+
+    @CommandLine.Option(names = '--path', description = 'The path for the plugin folder', required = true)
+    String path
 
     def run(client) {
         def params = [
-                siteId      : siteOptions.siteId,
-                remoteName  : remoteOptions.remoteName,
-                remoteBranch: remoteOptions.remoteBranch
+                siteId : siteOptions.siteId,
+                path   : path
         ]
-        if (mergeStrategy) {
-            params.mergeStrategy = mergeStrategy
-        }
-
         client.post {
-            request.uri.path = '/studio/api/2/repository/pull_from_remote.json'
+            request.uri.path = "/studio/api/2/marketplace/copy"
             request.body = params
         }.with {
             println response.message
