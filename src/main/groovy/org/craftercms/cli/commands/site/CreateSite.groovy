@@ -14,8 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.craftercms.cli.commands
+package org.craftercms.cli.commands.site
 
+import org.craftercms.cli.commands.AbstractCommand
 import org.craftercms.cli.options.AuthOptions
 import org.craftercms.cli.options.GitOptions
 import org.craftercms.cli.options.SiteOptions

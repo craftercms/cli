@@ -14,15 +14,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.craftercms.cli.commands
+package org.craftercms.cli.commands.site
 
+import org.craftercms.cli.commands.AbstractSyncCommand
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'sync-to', description = 'Sync the content of a site to a remote repository')
-class SyncTo extends AbstractSyncCommand {
+@CommandLine.Command(name = 'sync-from', description = 'Sync the content of a site from a remote repository')
+class SyncFrom extends AbstractSyncCommand {
 
-    @CommandLine.Option(names = ['-f', '--force'], description = 'Forces the update of the remote repository')
-    boolean force
+    @CommandLine.Option(names = ['-m', '--mergeStrategy'], description = 'The merge strategy to use', paramLabel = 'none|ours|theirs')
+    String mergeStrategy
 
     def run(client) {
         def params = [
@@ -30,12 +31,12 @@ class SyncTo extends AbstractSyncCommand {
                 remoteName  : remoteOptions.remoteName,
                 remoteBranch: remoteOptions.remoteBranch
         ]
-        if (force) {
-            params.force = force
+        if (mergeStrategy) {
+            params.mergeStrategy = mergeStrategy
         }
 
         client.post {
-            request.uri.path = '/studio/api/2/repository/push_to_remote.json'
+            request.uri.path = '/studio/api/2/repository/pull_from_remote.json'
             request.body = params
         }.with {
             println response.message

@@ -14,8 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.craftercms.cli.commands
+package org.craftercms.cli.commands.site
 
+import org.craftercms.cli.commands.AbstractCommand
 import picocli.CommandLine
 
 @CommandLine.Command(name = 'list-sites', description = 'List the sites that the current user can access')
