@@ -18,7 +18,7 @@
 
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>crafter-cli</artifactId>
+    <artifactId>cli</artifactId>
 
     <parent>
         <groupId>org.craftercms</groupId>
@@ -34,7 +34,7 @@
     </properties>
 
     <build>
-        <finalName>crafter-cli</finalName>
+        <finalName>cli</finalName>
         <plugins>
 
             <!-- Enable filtering for injecting the version -->
