@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!--
-  ~ Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+  ~ Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License version 3 as published by
@@ -28,8 +28,6 @@
     </parent>
 
     <properties>
-        <picocli.version>4.5.1</picocli.version>
-        <http.builder.version>1.0.4</http.builder.version>
         <assembleDirectory>${project.build.directory}/${project.artifactId}</assembleDirectory>
     </properties>
 
@@ -41,7 +39,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>${maven.resources.version}</version>
                 <configuration>
                     <resources>
                         <resource>
@@ -56,7 +54,7 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.11.0</version>
+                <version>${gmavenplus.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -74,7 +72,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>appassembler-maven-plugin</artifactId>
-                <version>2.1.0</version>
+                <version>${appassembler.maven.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -97,7 +95,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>${maven.assembly.version}</version>
                 <configuration>
                     <descriptors>
                         <descriptor>distribution.xml</descriptor>
