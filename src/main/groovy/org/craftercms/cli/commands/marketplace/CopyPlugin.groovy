@@ -26,17 +26,24 @@ class CopyPlugin extends AbstractCommand {
     @CommandLine.Mixin
     SiteOptions siteOptions
 
-    @CommandLine.Option(names = '--path', description = 'The plugin source path (must be a local folder to Crafter Studio)', required = true)
+    @CommandLine.Option(names = '--path', required = true,
+                        description = 'The plugin source path (must be a local folder to Crafter Studio)')
     String path
 
+    @CommandLine.Option(names = '--param', description = 'Additional parameter for the plugin')
+    Map<String, String> parameters
+
     def run(client) {
-        def params = [
+        def body = [
                 siteId : siteOptions.siteId,
                 path   : path
         ]
+        if (parameters) {
+            body.parameters = parameters
+        }
         client.post {
             request.uri.path = "/studio/api/2/marketplace/copy"
-            request.body = params
+            request.body = body
         }.with {
             println response.message
         }
