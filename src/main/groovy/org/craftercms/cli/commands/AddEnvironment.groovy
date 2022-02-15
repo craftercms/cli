@@ -19,7 +19,7 @@ package org.craftercms.cli.commands
 import groovyx.net.http.HttpException
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'add-environment', description = 'Adds the configuration to connect to Crafter CMS')
+@CommandLine.Command(name = 'add-environment', description = 'Adds the configuration to connect to CrafterCMS')
 class AddEnvironment extends AbstractCommand {
 
     @CommandLine.Option(names = ['-u', '--url'], required = true, description = 'The URL of the server')

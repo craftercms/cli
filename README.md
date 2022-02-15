@@ -1,12 +1,12 @@
 ![build status](https://app.travis-ci.com/craftercms/cli.svg?branch=develop)
 
 # Crafter CLI
-Commandline interface to Crafter CMS
+Commandline interface to CrafterCMS
 
 # Examples
 
 The first command needed to work with this tool is `add-environment`, you need to provide a name, the url for a
-Crafter CMS authoring server and the authentication information:
+CrafterCMS authoring server and the authentication information:
 
 `crafter-cli add-environment -e local -u http://localhost:8080 --username john --password`
 
