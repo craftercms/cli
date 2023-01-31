@@ -20,7 +20,7 @@ import picocli.CommandLine
 
 class SiteOptions {
 
-    @CommandLine.Option(names = ['-s', '--siteId'], required = true, description = 'The id of the site')
+    @CommandLine.Option(names = ['-s', '--siteId'], required = true, description = 'The id of the project')
     String siteId
 
 }

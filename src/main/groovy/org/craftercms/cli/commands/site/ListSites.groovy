@@ -19,7 +19,7 @@ package org.craftercms.cli.commands.site
 import org.craftercms.cli.commands.AbstractCommand
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'list-sites', description = 'List the sites that the current user can access')
+@CommandLine.Command(name = 'list-sites', description = 'List the projects that the current user can access')
 class ListSites extends AbstractCommand {
 
     def run(client) {
@@ -31,7 +31,7 @@ class ListSites extends AbstractCommand {
                     println " ${it.name} (${it.siteId})"
                 }
             } else {
-                println "There are no sites"
+                println "There are no projects"
             }
         }
     }

@@ -19,7 +19,7 @@ package org.craftercms.cli.commands.site
 import org.craftercms.cli.commands.AbstractSyncCommand
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'sync-to', description = 'Sync the content of a site to a remote repository')
+@CommandLine.Command(name = 'sync-to', description = 'Sync the content of a project to a remote repository')
 class SyncTo extends AbstractSyncCommand {
 
     @CommandLine.Option(names = ['-f', '--force'], description = 'Forces the update of the remote repository')

@@ -62,10 +62,10 @@ class GitOptions {
 
     static class CreateOptions {
 
-        @CommandLine.Option(names = '--clone', description = 'Create a site cloning a remote repository')
+        @CommandLine.Option(names = '--clone', description = 'Create a project cloning a remote repository')
         boolean clone
 
-        @CommandLine.Option(names = '--push', description = 'Create a site and push to a remote repository')
+        @CommandLine.Option(names = '--push', description = 'Create a project and push to a remote repository')
         boolean push
 
         def getCreateOption() {
