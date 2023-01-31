@@ -21,7 +21,7 @@ import org.craftercms.cli.options.AuthOptions
 import org.craftercms.cli.options.SiteOptions
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'add-remote', description = 'Adds a remote repository to a site')
+@CommandLine.Command(name = 'add-remote', description = 'Adds a remote repository to a project')
 class AddRemote extends AbstractCommand {
 
     @CommandLine.Mixin

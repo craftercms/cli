@@ -20,7 +20,7 @@ import org.craftercms.cli.commands.AbstractCommand
 import org.craftercms.cli.options.SiteOptions
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'copy-plugin', description = 'Copies a plugin from a Studio local folder into a site')
+@CommandLine.Command(name = 'copy-plugin', description = 'Copies a plugin from a Studio local folder into a project')
 class CopyPlugin extends AbstractCommand {
 
     @CommandLine.Mixin

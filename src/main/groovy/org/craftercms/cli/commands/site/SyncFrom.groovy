@@ -19,7 +19,7 @@ package org.craftercms.cli.commands.site
 import org.craftercms.cli.commands.AbstractSyncCommand
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'sync-from', description = 'Sync the content of a site from a remote repository')
+@CommandLine.Command(name = 'sync-from', description = 'Sync the content of a project from a remote repository')
 class SyncFrom extends AbstractSyncCommand {
 
     @CommandLine.Option(names = ['-m', '--mergeStrategy'], description = 'The merge strategy to use', paramLabel = 'none|ours|theirs')

@@ -10,7 +10,7 @@ CrafterCMS authoring server and the authentication information:
 
 `crafter-cli add-environment -e local -u http://localhost:8080 --username john --password`
 
-Once the environment has been added, you can create sites and sync a remote repository:
+Once the environment has been added, you can create projects and sync a remote repository:
 
 `crafter-cli create-site -e local -s editorial --blueprint org.craftercms.blueprint.editorial`
 
@@ -18,7 +18,7 @@ Once the environment has been added, you can create sites and sync a remote repo
 
 `crafter-cli sync-to -e local -s editorial -n origin -b site-updates`
 
-It is also possible to create a site from a remote repository and later sync it:
+It is also possible to create a project from a remote repository and later sync it:
 
 ```
 crafter-cli create-site -e local -s my-site -n My Site \

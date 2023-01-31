@@ -22,7 +22,7 @@ import org.craftercms.cli.options.GitOptions
 import org.craftercms.cli.options.SiteOptions
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'create-site', description = 'Creates a site from a blueprint or a remote repository')
+@CommandLine.Command(name = 'create-site', description = 'Creates a project from a blueprint or a remote repository')
 class CreateSite extends AbstractCommand {
 
     @CommandLine.Mixin
@@ -34,10 +34,10 @@ class CreateSite extends AbstractCommand {
     @CommandLine.Mixin
     GitOptions gitOptions
 
-    @CommandLine.Option(names = ['-d', '--description'], description = 'The description for the site')
+    @CommandLine.Option(names = ['-d', '--description'], description = 'The description for the project')
     String description
 
-    @CommandLine.Option(names = '--blueprint', description = 'The id of the site blueprint')
+    @CommandLine.Option(names = '--blueprint', description = 'The id of the project blueprint')
     String blueprint
 
     @CommandLine.Option(names = ['-o', '--orphan'], description = 'Discards the history from the remote repository')

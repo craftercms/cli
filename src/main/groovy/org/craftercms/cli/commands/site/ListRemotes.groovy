@@ -20,7 +20,7 @@ import org.craftercms.cli.commands.AbstractCommand
 import org.craftercms.cli.options.SiteOptions
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'list-remotes', description = 'List the remote repositories of a site')
+@CommandLine.Command(name = 'list-remotes', description = 'List the remote repositories of a project')
 class ListRemotes extends AbstractCommand {
 
     @CommandLine.Mixin
