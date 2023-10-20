@@ -23,16 +23,18 @@ import picocli.CommandLine
 class ListSites extends AbstractCommand {
 
     def run(client) {
-        client.get {
-            request.uri.path = '/studio/api/2/users/me/sites.json'
-        }.with {
-            if (sites) {
-                sites.each {
-                    println " ${it.name} (${it.siteId})"
-                }
-            } else {
-                println "There are no projects"
+        def path = '/studio/api/2/users/me/sites.json'
+        def response = client.get(path)
+        if (!response) {
+            return
+        }
+
+        if (response.sites) {
+            response.sites.each {
+                println " ${it.name} (${it.siteId})"
             }
+        } else {
+            println "There are no projects"
         }
     }
 

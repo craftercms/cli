@@ -35,10 +35,9 @@ class SyncFrom extends AbstractSyncCommand {
             params.mergeStrategy = mergeStrategy
         }
 
-        client.post {
-            request.uri.path = '/studio/api/2/repository/pull_from_remote.json'
-            request.body = params
-        }.with {
+        def path = '/studio/api/2/repository/pull_from_remote.json'
+        def response = client.post(path, params)
+        if (response) {
             println response.message
         }
     }

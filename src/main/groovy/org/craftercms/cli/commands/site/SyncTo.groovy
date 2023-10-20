@@ -35,10 +35,9 @@ class SyncTo extends AbstractSyncCommand {
             params.force = force
         }
 
-        client.post {
-            request.uri.path = '/studio/api/2/repository/push_to_remote.json'
-            request.body = params
-        }.with {
+        def path = '/studio/api/2/repository/push_to_remote.json'
+        def response = client.post(path, params)
+        if (response) {
             println response.message
         }
     }

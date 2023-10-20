@@ -18,16 +18,11 @@ package org.craftercms.cli.commands
 
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
-import groovyx.net.http.HttpException
+import org.craftercms.cli.utils.HttpClient
 import picocli.CommandLine
 import picocli.CommandLine.Model.CommandSpec
 
-import static groovyx.net.http.ContentTypes.JSON
-import static groovyx.net.http.HttpBuilder.configure
-
 abstract class AbstractCommand implements Runnable {
-
-    static final def AUTH_HEADER = "Authorization"
 
     @CommandLine.Option(names = ['--config'], description = 'The folder to store configurations',
             paramLabel = 'path')
@@ -46,27 +41,9 @@ abstract class AbstractCommand implements Runnable {
         additionalValidations()
         try {
             def config = loadConfig()
-            def client = getClient(config)
+            def client = HttpClient.getInstance(config)
             run(client)
-        } catch (HttpException e) {
-            println "Status Code ${e.statusCode}"
-            e.body.with {
-                if (message) {
-                    // API 1 format
-                    println "Error Message: ${message}"
-                } else {
-                    // API 2 format
-                    println "Error Code: ${response.code}"
-                    println "Error Message: ${response.message}"
-                    if (response.remedialAction) {
-                        println "Error Action: ${response.remedialAction}"
-                    }
-                    if (response.documentationUrl) {
-                        println "Error Documentation: ${response.documentationUrl}"
-                    }
-                }
-            }
-        } catch (e) {
+        } catch (Exception e) {
             println e.message
         }
     }
@@ -75,20 +52,6 @@ abstract class AbstractCommand implements Runnable {
 
     def additionalValidations() {
 
-    }
-
-    def getClient(config) {
-        return configure {
-            request.uri = config.url
-            request.contentType = JSON[0]
-            if (config.token) {
-                request.headers[AUTH_HEADER] = "Bearer ${config.token}"
-            } else {
-                // This is the right away according to docs, but it doesn't work...
-                // request.auth.basic(username, password)
-                request.headers[AUTH_HEADER] = "Basic ${"${config.username}:${config.password}".bytes.encodeBase64()}"
-            }
-        }
     }
 
     def saveConfig(config) {

@@ -118,7 +118,7 @@
     <dependencies>
         <!-- Groovy -->
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <version>${groovy.version}</version>
             <type>pom</type>
@@ -139,9 +139,9 @@
 
         <!-- HTTP Client -->
         <dependency>
-            <groupId>io.github.http-builder-ng</groupId>
-            <artifactId>http-builder-ng-core</artifactId>
-            <version>${http.builder.version}</version>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
         </dependency>
 
         <!-- Logging -->
