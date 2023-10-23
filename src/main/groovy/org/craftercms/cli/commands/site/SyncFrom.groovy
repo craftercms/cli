@@ -36,9 +36,9 @@ class SyncFrom extends AbstractSyncCommand {
         }
 
         def path = '/studio/api/2/repository/pull_from_remote.json'
-        def response = client.post(path, params)
-        if (response) {
-            println response.message
+        def result = client.post(path, params)
+        if (result) {
+            println result.response.message
         }
     }
 

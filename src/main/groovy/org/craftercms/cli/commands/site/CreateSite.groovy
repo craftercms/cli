@@ -111,9 +111,9 @@ class CreateSite extends AbstractCommand {
         }
 
         def path = '/studio/api/1/services/api/1/site/create.json'
-        def response = client.post(path, params)
-        if (response) {
-            println response.message
+        def result = client.post(path, params)
+        if (result) {
+            println result.message
         }
     }
 

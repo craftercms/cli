@@ -22,13 +22,13 @@ import groovy.json.JsonSlurper
 
 class HttpClient {
     private static HttpClient instance
-    private String baseUri
-    private String authorizationHeader
-    private OkHttpClient client
+    private final String baseUri
+    private final String authorizationHeader
+    private final OkHttpClient client
 
-    static final def AUTH_HEADER = 'Authorization'
+    static final String AUTH_HEADER = 'Authorization'
 
-    static def getInstance(config) {
+    static HttpClient getInstance(config) {
         if (instance == null) {
             instance = new HttpClient(config)
         }
@@ -62,7 +62,7 @@ class HttpClient {
                 .build()
 
         Response response = client.newCall(request).execute()
-        if (!response.isSuccessful()) {
+        if (!response.successful) {
             displayResponseDetail(response)
             return null
         }
@@ -85,7 +85,7 @@ class HttpClient {
                 .build()
 
         Response response = client.newCall(request).execute()
-        if (!response.isSuccessful()) {
+        if (!response.successful) {
             displayResponseDetail(response)
             return null
         }
@@ -97,7 +97,7 @@ class HttpClient {
      * Display HTTP response object detail
      * @param response HTTP response object
      */
-    private def displayResponseDetail(Response response) {
+    private void displayResponseDetail(Response response) {
         println "Status Code: ${response.code()}"
         def body = new JsonSlurper().parseText(response.body().string())
 

@@ -24,13 +24,13 @@ class ListSites extends AbstractCommand {
 
     def run(client) {
         def path = '/studio/api/2/users/me/sites.json'
-        def response = client.get(path)
-        if (!response) {
+        def result = client.get(path)
+        if (!result) {
             return
         }
 
-        if (response.sites) {
-            response.sites.each {
+        if (result.sites) {
+            result.sites.each {
                 println " ${it.name} (${it.siteId})"
             }
         } else {

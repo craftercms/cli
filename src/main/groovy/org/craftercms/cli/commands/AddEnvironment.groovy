@@ -46,7 +46,6 @@ class AddEnvironment extends AbstractCommand {
 
             println "Environment added"
         } catch (Exception e) {
-            println e
             println e.message
         }
     }
@@ -54,8 +53,8 @@ class AddEnvironment extends AbstractCommand {
     def test(client) {
         try {
             def path = '/studio/api/2/users/me.json'
-            def response = client.get(path)
-            def user = response.authenticatedUser
+            def result = client.get(path)
+            def user = result.authenticatedUser
             println "Authenticated as ${user.firstName} ${user.lastName} (${user.username})"
         } catch (Exception e) {
             throw new RuntimeException("Error authenticating user, please check your credentials", e)

@@ -29,13 +29,13 @@ class ListRemotes extends AbstractCommand {
     def run(client) {
         def path = '/studio/api/2/repository/list_remotes.json'
         def query = [siteId: siteOptions.siteId]
-        def response = client.get(path, query)
-        if (!response) {
+        def result = client.get(path, query)
+        if (!result) {
             return
         }
 
-        if (response.remotes) {
-            response.remotes.each {
+        if (result.remotes) {
+            result.remotes.each {
                 println " ${it.name} (${it.url})"
                 it.branches.each {
                     println " - ${it}"
