@@ -1,7 +1,5 @@
-![build status](https://app.travis-ci.com/craftercms/cli.svg?branch=develop)
-
 # Crafter CLI
-Commandline interface to CrafterCMS
+Commandline interface to CrafterCMS. Learn more at http://docs.craftercms.org.
 
 # Examples
 
@@ -29,3 +27,16 @@ crafter-cli create-site -e local -s my-site -n My Site \
 `crafter-cli sync-from -e local -s editorial -n origin`
 
 For a detailed list of commands & arguments run `crafter-cli help`
+
+# Community
+## Contributors
+https://github.com/craftercms/craftercms/blob/develop/CONTRIBUTORS.md
+
+## Code of Conduct
+https://github.com/craftercms/craftercms/blob/develop/CODE_OF_CONDUCT.md
+
+## Contributing
+https://github.com/craftercms/craftercms/blob/develop/CONTRIBUTING.md
+
+## Git Workflow
+https://github.com/craftercms/craftercms/blob/develop/GIT_WORKFLOW.md
