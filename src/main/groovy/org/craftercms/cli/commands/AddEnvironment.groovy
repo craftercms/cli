@@ -16,7 +16,7 @@
 
 package org.craftercms.cli.commands
 
-import groovyx.net.http.HttpException
+import org.craftercms.cli.utils.HttpClient
 import picocli.CommandLine
 
 @CommandLine.Command(name = 'add-environment', description = 'Adds the configuration to connect to CrafterCMS')
@@ -40,27 +40,23 @@ class AddEnvironment extends AbstractCommand {
                 config.username = auth.basic?.username
                 config.password = auth.basic?.password
             }
-            def client = getClient(config)
+            def client = HttpClient.getInstance(config)
             test(client)
             saveConfig(config)
 
             println "Environment added"
-        } catch (HttpException e) {
-            println e.body.message
-        } catch (e) {
+        } catch (Exception e) {
             println e.message
         }
     }
 
     def test(client) {
         try {
-            client.get {
-                request.uri.path = '/studio/api/2/users/me.json'
-            }.with {
-                def user = authenticatedUser
-                println "Authenticated as ${user.firstName} ${user.lastName} (${user.username})"
-            }
-        } catch (e) {
+            def path = '/studio/api/2/users/me.json'
+            def result = client.get(path)
+            def user = result.authenticatedUser
+            println "Authenticated as ${user.firstName} ${user.lastName} (${user.username})"
+        } catch (Exception e) {
             throw new RuntimeException("Error authenticating user, please check your credentials", e)
         }
     }
