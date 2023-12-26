@@ -24,13 +24,14 @@ import org.craftercms.cli.commands.site.ListRemotes
 import org.craftercms.cli.commands.site.ListSites
 import org.craftercms.cli.commands.site.SyncFrom
 import org.craftercms.cli.commands.site.SyncTo
+import org.craftercms.cli.commands.user.CreateUser
 import picocli.CommandLine
 
 @CommandLine.Command(
         name = 'crafter-cli', usageHelpAutoWidth = true,
         versionProvider = VersionProvider.class, mixinStandardHelpOptions = true,
         subcommands = [CommandLine.HelpCommand, AddEnvironment, AddRemote, CreateSite, ListRemotes, SyncFrom, SyncTo,
-                        ListSites, CopyPlugin])
+                        ListSites, CopyPlugin, CreateUser])
 class Main {
 
     static def main(args) {
