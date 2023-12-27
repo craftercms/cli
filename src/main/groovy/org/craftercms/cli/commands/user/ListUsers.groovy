@@ -24,7 +24,7 @@ import org.apache.commons.csv.CSVPrinter
 @CommandLine.Command(name = 'list-users', description = 'Get all Studio users')
 class ListUsers extends AbstractCommand {
 
-    @CommandLine.Option(names = ['-si', '--site-id'], description = 'The site ID to filter users for a particular site')
+    @CommandLine.Option(names = ['-si', '--site-id'], description = 'The project/site ID to filter users for a particular project/site')
     String siteId
 
     @CommandLine.Option(names = ['-k', '--keyword'], description = 'The keyword to filter users')
