@@ -20,7 +20,7 @@ import org.craftercms.cli.commands.AbstractCommand
 import org.craftercms.cli.options.UserOptions
 import picocli.CommandLine
 import org.apache.commons.csv.CSVParser
-import static org.apache.commons.csv.CSVFormat.*
+import org.apache.commons.csv.CSVFormat
 import java.nio.file.Paths
 
 @CommandLine.Command(name = 'create-user', description = 'Creates a user from command parameters or bulk create users from a CSV file')
@@ -37,7 +37,10 @@ class CreateUser extends AbstractCommand {
     def run(client) {
         if (bulkFile) {
             Paths.get(bulkFile).withReader { reader ->
-                CSVParser csv = new CSVParser(reader, DEFAULT.withHeader())
+                CSVFormat format = CSVFormat.DEFAULT.builder()
+                                    .setHeader()
+                                    .build()
+                CSVParser csv = new CSVParser(reader, format)
                 for (record in csv.iterator()) {
                     createUser(client, record.toMap())
                 }
@@ -49,6 +52,11 @@ class CreateUser extends AbstractCommand {
         }
     }
 
+    /**
+     * Create a new user
+     * @param client HTTPClient object
+     * @param options create user options
+     */
     def createUser(client, options) {
         def params = [
                 username: options.username,
@@ -66,6 +74,11 @@ class CreateUser extends AbstractCommand {
         }
     }
 
+    /**
+     * Check if the options has required fields
+     * @param options command options
+     * @return true if valid, false otherwise
+     */
     def hasValidUserOptions(options) {
         return options && options.username && options.password
                 && options.email && options.firstName && options.lastName
