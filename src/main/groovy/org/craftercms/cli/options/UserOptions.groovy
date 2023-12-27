@@ -37,8 +37,4 @@ class UserOptions {
 
     @CommandLine.Option(names = ['-en', '--enabled'], description = 'Indicates if the user is enabled. Default is true.')
     String enabled
-
-    @CommandLine.Option(names = ['-ex', '--externallyManaged'],
-            description = 'Indicates if a user is managed in by an external system (LDAP, SAML, etc.). Default is false.')
-    String externallyManaged
 }

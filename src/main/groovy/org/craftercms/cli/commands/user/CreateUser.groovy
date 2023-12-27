@@ -30,7 +30,7 @@ class CreateUser extends AbstractCommand {
     UserOptions userOptions
 
     @CommandLine.Option(names = ['-bf', '--bulk-file'],
-            description = 'Absolute path of the CSV file to bulk create users. CSV file should have the header: username,password,firstName,lastName,email,enabled,externallyManaged')
+            description = 'Absolute path of the CSV file to bulk create users. CSV file should have the header: username,password,firstName,lastName,email,enabled')
     String bulkFile
 
     @Override
@@ -56,8 +56,7 @@ class CreateUser extends AbstractCommand {
                 firstName: options.firstName,
                 lastName: options.lastName,
                 email: options.email,
-                enabled: options.enabled ?: true,
-                externallyManaged: options.externallyManaged ?: false
+                enabled: options.enabled ?: true
         ]
 
         def path = '/studio/api/2/users'
