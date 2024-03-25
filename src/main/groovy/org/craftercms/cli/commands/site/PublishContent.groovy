@@ -70,9 +70,9 @@ class PublishContent extends AbstractCommand {
             return
         }
         if (schedule) {
-            println "The site has been scheduled to be published to ${publishingTarget} at ${schedule}"
+            println "The selected content has been scheduled to be published to ${publishingTarget} at ${schedule}"
         } else {
-            println "The site has been published to ${publishingTarget}"
+            println "The selected content has been published to ${publishingTarget}"
         }
     }
 }
