@@ -57,7 +57,7 @@ class PublishContent extends AbstractCommand {
         def optionalDependencies = this.optionalDependencies ? this.optionalDependencies.tokenize(',') : null
 
         def path = '/studio/api/2/workflow/publish.json'
-        def query = [
+        def command = [
                 siteId              : siteOptions.siteId,
                 items               : items,
                 optionalDependencies: optionalDependencies,
@@ -65,9 +65,12 @@ class PublishContent extends AbstractCommand {
                 schedule            : schedule,
                 comment             : comment
         ]
-        def result = client.post(path, query)
-        if (!result) {
-            return
+        def result = client.post {
+            request.uri.path = path
+            request.body = command
+        }.with {
+            println response.message
+            return response.success
         }
         if (schedule) {
             println "The selected content has been scheduled to be published to ${publishingTarget} at ${schedule}"

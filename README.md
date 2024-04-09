@@ -6,7 +6,7 @@ Commandline interface to CrafterCMS. Learn more at http://docs.craftercms.org.
 The first command needed to work with this tool is `add-environment`, you need to provide a name, the url for a
 CrafterCMS authoring server and the authentication information:
 
-`crafter-cli add-environment -e local -u http://localhost:8080 --username john --token`
+`crafter-cli add-environment -e local -u http://localhost:8080 --username john --password`
 
 Once the environment has been added, you can create projects and sync a remote repository:
 
@@ -26,7 +26,7 @@ crafter-cli create-site -e local -s my-site -n My Site \
 
 `crafter-cli sync-from -e local -s editorial -n origin`
 
-Also, you are able to publish an item to live or staging (must enable staging first):
+Also, you are able to publish an item to live or staging (staging must be enabled first before using that target):
 
 `crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml"`
 
@@ -34,7 +34,7 @@ Also, you are able to publish an item to live or staging (must enable staging fi
 
 To publish various items to live or staging, you can use the following command (be wary of the quotes and spaces):
 
-`crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml,/site/website/about.xml"`
+`crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml,/site/website/health/index.xml"`
 
 You can add optional (soft) dependencies to the publish command:
 
