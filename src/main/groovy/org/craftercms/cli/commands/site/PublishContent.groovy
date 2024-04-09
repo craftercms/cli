@@ -49,6 +49,9 @@ class PublishContent extends AbstractCommand {
         if (!publishingTarget) {
             throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Missing required option publishingTarget')
         }
+        if (publishingTarget != 'live' && publishingTarget != 'staging') {
+            throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Invalid publishing target. Use live or staging')
+        }
     }
 
     def run(client) {
@@ -69,8 +72,8 @@ class PublishContent extends AbstractCommand {
             request.uri.path = path
             request.body = command
         }.with {
-            println response.message
-            return response.success
+            println(response.message)
+            return response
         }
         if (schedule) {
             println "The selected content has been scheduled to be published to ${publishingTarget} at ${schedule}"
