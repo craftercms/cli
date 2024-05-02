@@ -18,19 +18,14 @@ package org.craftercms.cli
 
 import org.craftercms.cli.commands.AddEnvironment
 import org.craftercms.cli.commands.marketplace.CopyPlugin
-import org.craftercms.cli.commands.site.AddRemote
-import org.craftercms.cli.commands.site.CreateSite
-import org.craftercms.cli.commands.site.ListRemotes
-import org.craftercms.cli.commands.site.ListSites
-import org.craftercms.cli.commands.site.SyncFrom
-import org.craftercms.cli.commands.site.SyncTo
+import org.craftercms.cli.commands.site.*
 import picocli.CommandLine
 
 @CommandLine.Command(
         name = 'crafter-cli', usageHelpAutoWidth = true,
         versionProvider = VersionProvider.class, mixinStandardHelpOptions = true,
         subcommands = [CommandLine.HelpCommand, AddEnvironment, AddRemote, CreateSite, ListRemotes, SyncFrom, SyncTo,
-                        ListSites, CopyPlugin])
+                ListSites, CopyPlugin, PublishContent])
 class Main {
 
     static def main(args) {
@@ -40,7 +35,7 @@ class Main {
     static class VersionProvider implements CommandLine.IVersionProvider {
 
         String[] getVersion() throws Exception {
-            return [ getClass().getResource('version.txt').text ]
+            return [getClass().getResource('version.txt').text]
         }
 
     }
