@@ -6,7 +6,7 @@ Commandline interface to CrafterCMS. Learn more at http://docs.craftercms.org.
 The first command needed to work with this tool is `add-environment`, you need to provide a name, the url for a
 CrafterCMS authoring server and the authentication information:
 
-`crafter-cli add-environment -e local -u http://localhost:8080 --username john --password`
+`crafter-cli add-environment -e local -u http://localhost:8080 --username john --password --generate-token`
 
 Once the environment has been added, you can create projects and sync a remote repository:
 
