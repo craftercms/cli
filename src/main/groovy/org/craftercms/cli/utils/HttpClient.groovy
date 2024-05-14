@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2023 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -25,6 +25,7 @@ class HttpClient {
     private final String baseUri
     private final String authorizationHeader
     private final OkHttpClient client
+    private final BasicCookieJar cookieJar
 
     static final String AUTH_HEADER = 'Authorization'
 
@@ -35,9 +36,15 @@ class HttpClient {
         return instance
     }
 
+    static HttpClient resetClient(config) {
+        instance = null
+        return getInstance(config)
+    }
+
     HttpClient(config) {
         this.baseUri = config.url
-        this.client = new OkHttpClient()
+        this.cookieJar = new BasicCookieJar()
+        this.client = new OkHttpClient().newBuilder().cookieJar(cookieJar).build()
         if (config.token) {
             authorizationHeader = "Bearer ${config.token}"
         } else {
@@ -91,6 +98,27 @@ class HttpClient {
         }
 
         return new JsonSlurper().parseText(response.body().string())
+    }
+
+    /**
+     * HTTP POST method with form parameters
+     * @param path API path
+     * @param formParams form parameters
+     */
+    def postForm(String path, Map formParams) {
+        FormBody.Builder formBuilder = new FormBody.Builder()
+        formParams.each { k, v -> formBuilder.add(k, v) }
+        RequestBody formBody = formBuilder.build()
+        Request request = new Request.Builder()
+                .url(baseUri + path)
+                .post(formBody)
+                .addHeader("Cookie", "XSRF-TOKEN=${formParams["_csrf"]}")
+                .build()
+
+        Response response = client.newCall(request).execute()
+        if (!response.successful) {
+            displayResponseDetail(response)
+        }
     }
 
     /**
