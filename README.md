@@ -26,13 +26,13 @@ crafter-cli create-site -e local -s my-site -n My Site \
 
 `crafter-cli sync-from -e local -s editorial -n origin`
 
-Also, you are able to publish an item to live or staging (staging must be enabled first before using that target):
+You can publish content to the Live or Staging targets (Staging must be enabled to publish to it):
 
 `crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml"`
 
 `crafter-cli publish-content -e local -s editorial --publishingTarget staging --items "/site/website/index.xml"`
 
-To publish various items to live or staging, you can use the following command (be wary of the quotes and spaces):
+To publish multiple items, separate them by a comma:
 
 `crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml,/site/website/health/index.xml"`
 
@@ -42,7 +42,7 @@ You can add optional (soft) dependencies to the publish command:
 
 `crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/entertainment/index.xml,/site/website/articles/2021/1/men-styles-for-winter/index.xml" --optionalDependencies "/templates/web/pages/category-landing.ftl,/templates/web/pages/article.ftl"`
 
-You can set item(s) to be published in a specific date and time (ISO Date Time Format):
+You can schedule content to be published:
 
 `crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml" --schedule "2025-10-31T01:30:00.000-05:00" --comment "My comment"`
 

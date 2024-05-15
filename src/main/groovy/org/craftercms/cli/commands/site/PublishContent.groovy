@@ -74,7 +74,7 @@ class PublishContent extends AbstractCommand {
         }
         if (schedule) {
             println(result.response.message)
-            println "The selected content has been scheduled to be published to ${publishingTarget} at ${schedule}"
+            println "The selected content has been submitted to be published to ${publishingTarget} at ${schedule}"
         } else {
             println(result.response.message)
             println "The selected content has been published to ${publishingTarget}"
