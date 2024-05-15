@@ -19,13 +19,14 @@ package org.craftercms.cli
 import org.craftercms.cli.commands.AddEnvironment
 import org.craftercms.cli.commands.marketplace.CopyPlugin
 import org.craftercms.cli.commands.site.*
+import org.craftercms.cli.commands.security.CreateAccessToken
 import picocli.CommandLine
 
 @CommandLine.Command(
         name = 'crafter-cli', usageHelpAutoWidth = true,
         versionProvider = VersionProvider.class, mixinStandardHelpOptions = true,
         subcommands = [CommandLine.HelpCommand, AddEnvironment, AddRemote, CreateSite, ListRemotes, SyncFrom, SyncTo,
-                ListSites, CopyPlugin, PublishContent])
+                ListSites, CopyPlugin, PublishContent, CreateAccessToken])
 class Main {
 
     static def main(args) {

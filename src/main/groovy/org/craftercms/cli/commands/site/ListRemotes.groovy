@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -27,21 +27,22 @@ class ListRemotes extends AbstractCommand {
     SiteOptions siteOptions
 
     def run(client) {
-        client.get {
-            request.uri.path = '/studio/api/2/repository/list_remotes.json'
-            request.uri.query = [siteId: siteOptions.siteId]
-        }.with {
-            if (remotes) {
-                remotes.each {
-                    println " ${it.name} (${it.url})"
-                    it.branches.each {
-                        println " - ${it}"
-                    }
+        def path = '/studio/api/2/repository/list_remotes.json'
+        def query = [siteId: siteOptions.siteId]
+        def result = client.get(path, query)
+        if (!result) {
+            return
+        }
+
+        if (result.remotes) {
+            result.remotes.each {
+                println " ${it.name} (${it.url})"
+                it.branches.each {
+                    println " - ${it}"
                 }
-            } else {
-                println "There are no remote repositories"
             }
+        } else {
+            println "There are no remote repositories"
         }
     }
-
 }
