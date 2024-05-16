@@ -68,17 +68,16 @@ class PublishContent extends AbstractCommand {
                 schedule            : schedule,
                 comment             : comment
         ]
-        def result = client.post {
-            request.uri.path = path
-            request.body = command
-        }.with {
-            println(response.message)
-            return response
+        def result = client.post(path, command)
+        if (!result) {
+            return
         }
         if (schedule) {
-            println "The selected content has been scheduled to be published to ${publishingTarget} at ${schedule}"
+            println(result.response.message)
+            println "The selected content has been submitted to be published to ${publishingTarget} at ${schedule}"
         } else {
-            println "The selected content has been published to ${publishingTarget}"
+            println(result.response.message)
+            println "The selected content has been submitted to be published to ${publishingTarget}"
         }
     }
 }
