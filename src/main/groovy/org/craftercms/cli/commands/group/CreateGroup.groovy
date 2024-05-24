@@ -76,6 +76,6 @@ class CreateGroup extends AbstractCommand {
      * @return true if valid, false otherwise
      */
     def hasValidGroupOptions(options) {
-        return options && options.name && options.desc
+        return options && options.name
     }
 }
