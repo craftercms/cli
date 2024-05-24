@@ -29,14 +29,14 @@ class CreateGroup extends AbstractCommand {
     @CommandLine.Mixin
     GroupOptions groupOptions
 
-    @CommandLine.Option(names = ['-bf', '--bulk-file'],
-            description = 'Absolute path of the CSV file to bulk create groups. CSV file should have the header: name,desc')
-    String bulkFile
+    @CommandLine.Option(names = ['-gi', '--group-import-file'],
+            description = 'Path of Group CSV file to import. The file rows should be: name, description.')
+    String groupFile
 
     @Override
     def run(client) {
-        if (bulkFile) {
-            Paths.get(bulkFile).withReader { reader ->
+        if (groupFile != null && !groupFile.isEmpty()) {
+            Paths.get(groupFile).withReader { reader ->
                 CSVFormat format = CSVFormat.DEFAULT.builder()
                         .setHeader()
                         .build()

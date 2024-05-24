@@ -18,9 +18,9 @@ package org.craftercms.cli.options
 
 import picocli.CommandLine
 
-class ListGroupsOptions {
+class FilterAndPaginateOptions {
 
-    @CommandLine.Option(names = ['-k', '--keyword'], description = 'The keyword to filter groups')
+    @CommandLine.Option(names = ['-k', '--keyword'], description = 'A keyword to filter by')
     String keyword
 
     @CommandLine.Option(names = ['-os', '--offset'], description = 'Offset of first record in the response. Default is 0.')
@@ -33,6 +33,6 @@ class ListGroupsOptions {
             description = 'The fields to use for sorting, plus the asc or desc keyword case-insensitive. Multiple fields are separated by commas. Example: column1 ASC, column2 DESC.')
     String sort
 
-    @CommandLine.Option(names = ['-o', '--output'], description = 'CSV output file to output the groups list')
+    @CommandLine.Option(names = ['-o', '--output'], description = 'Output file')
     String output
 }

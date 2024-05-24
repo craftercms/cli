@@ -19,14 +19,14 @@ package org.craftercms.cli.commands.group
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVPrinter
 import org.craftercms.cli.commands.AbstractCommand
-import org.craftercms.cli.options.ListGroupsOptions
+import org.craftercms.cli.options.FilterAndPaginateOptions
 import picocli.CommandLine
 
 @CommandLine.Command(name = 'list-groups', description = 'List all the groups or search for groups by keyword or sort by a field.')
 class ListGroups extends AbstractCommand {
 
     @CommandLine.Mixin
-    ListGroupsOptions listGroupsOptions
+    FilterAndPaginateOptions listGroupsOptions
 
     @Override
     def run(Object client) {

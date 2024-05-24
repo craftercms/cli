@@ -20,9 +20,9 @@ import picocli.CommandLine
 
 class GroupOptions {
 
-    @CommandLine.Option(names = ['-n', '--name'], description = 'Group name. Required if --bulk-file is not specified.')
+    @CommandLine.Option(names = ['-gn', '--group-name'], description = 'Group name. Required if not bulk importing from a file.')
     String name
 
-    @CommandLine.Option(names = ['-d', '--desc'], description = 'Group description.')
+    @CommandLine.Option(names = ['-gd', '--group-desc'], description = 'Group description.')
     String desc
 }
