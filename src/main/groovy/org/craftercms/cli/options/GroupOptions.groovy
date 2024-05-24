@@ -23,6 +23,6 @@ class GroupOptions {
     @CommandLine.Option(names = ['-n', '--name'], description = 'Group name. Required if --bulk-file is not specified.')
     String name
 
-    @CommandLine.Option(names = ['-d', '--desc'], description = 'Group description. Required if --bulk-file is not specified.')
+    @CommandLine.Option(names = ['-d', '--desc'], description = 'Group description.')
     String desc
 }
