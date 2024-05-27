@@ -26,20 +26,20 @@ import picocli.CommandLine
 class ListGroups extends AbstractCommand {
 
     @CommandLine.Mixin
-    FilterAndPaginateOptions listGroupsOptions
+    FilterAndPaginateOptions filterAndPaginateOptions
 
     @Override
     def run(Object client) {
         def path = '/studio/api/2/groups'
         def queryParams = [:]
-        if (listGroupsOptions.keyword) {
-            queryParams.keyword = listGroupsOptions.keyword
+        if (filterAndPaginateOptions.keyword) {
+            queryParams.keyword = filterAndPaginateOptions.keyword
         }
-        if (listGroupsOptions.sort) {
-            queryParams.sort = listGroupsOptions.sort
+        if (filterAndPaginateOptions.sort) {
+            queryParams.sort = filterAndPaginateOptions.sort
         }
-        queryParams.offset = (listGroupsOptions.offset ?: 0).toString()
-        queryParams.limit = (listGroupsOptions.limit ?: 10).toString()
+        queryParams.offset = (filterAndPaginateOptions.offset ?: 0).toString()
+        queryParams.limit = (filterAndPaginateOptions.limit ?: 10).toString()
         def result = client.get(path, queryParams)
         if (!result) {
             return
@@ -62,8 +62,8 @@ class ListGroups extends AbstractCommand {
      * @return the writer
      */
     def getWriter() {
-        if (listGroupsOptions.output) {
-            def csvFile = new File(listGroupsOptions.output)
+        if (filterAndPaginateOptions.output) {
+            def csvFile = new File(filterAndPaginateOptions.output)
             return csvFile.newWriter()
         }
 
@@ -83,8 +83,8 @@ class ListGroups extends AbstractCommand {
             csvPrinter.printRecord([it.id, it.externallyManaged, it.name, it.desc])
         }
 
-        if (listGroupsOptions.output) {
-            println "Saved to file ${listGroupsOptions.output}."
+        if (filterAndPaginateOptions.output) {
+            println "Saved to file ${filterAndPaginateOptions.output}."
         } else {
             println '----------'
             println writer.toString()
