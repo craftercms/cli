@@ -56,11 +56,11 @@ class AddRemote extends AbstractCommand {
             // trim to avoid issues with empty lines
             params.remotePrivateKey = authAware.privateKey.text.trim()
         }
-        client.post {
-            request.uri.path = '/studio/api/2/repository/add_remote.json'
-            request.body = params
-        }.with {
-            println response.message
+
+        def path = '/studio/api/2/repository/add_remote.json'
+        def result = client.post(path, params)
+        if (result) {
+            println result.response.message
         }
     }
 

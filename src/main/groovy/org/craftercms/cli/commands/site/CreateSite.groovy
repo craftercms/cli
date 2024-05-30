@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -110,11 +110,10 @@ class CreateSite extends AbstractCommand {
             params.site_params = siteParams
         }
 
-        client.post {
-            request.uri.path = "/studio/api/1/services/api/1/site/create.json"
-            request.body = params
-        }.with {
-            println message
+        def path = '/studio/api/1/services/api/1/site/create.json'
+        def result = client.post(path, params)
+        if (result) {
+            println result.message
         }
     }
 

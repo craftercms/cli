@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2024 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -41,11 +41,12 @@ class CopyPlugin extends AbstractCommand {
         if (parameters) {
             body.parameters = parameters
         }
-        client.post {
-            request.uri.path = "/studio/api/2/marketplace/copy"
-            request.body = body
-        }.with {
-            println response.message
+
+        def path = '/studio/api/2/marketplace/copy'
+        def result = client.post(path, body)
+        if (result) {
+            println "Copy plugin response"
+            println result.response.message
         }
     }
 

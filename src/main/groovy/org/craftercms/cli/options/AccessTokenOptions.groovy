@@ -14,28 +14,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.craftercms.cli.commands.site
+package org.craftercms.cli.options
 
-import org.craftercms.cli.commands.AbstractCommand
 import picocli.CommandLine
 
-@CommandLine.Command(name = 'list-sites', description = 'List the projects that the current user can access')
-class ListSites extends AbstractCommand {
+class AccessTokenOptions {
 
-    def run(client) {
-        def path = '/studio/api/2/users/me/sites.json'
-        def result = client.get(path)
-        if (!result) {
-            return
-        }
+    @CommandLine.Option(names = ['-la', '--label'], description = 'The label to set for the token')
+    String label
 
-        if (result.sites) {
-            result.sites.each {
-                println " ${it.name} (${it.siteId})"
-            }
-        } else {
-            println "There are no projects"
+    @CommandLine.Option(names = ['-et', '--expires-at'], description = 'The expiration date for the token in the format YYYY-MM-DDTHH:MM:SSZ (UTC)')
+    String expiresAt
+
+    @CommandLine.Spec
+    CommandLine.Model.CommandSpec commandSpec
+
+    def validate() {
+        if (!label) {
+            throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Missing required option label')
         }
     }
-
 }
