@@ -26,6 +26,14 @@ crafter-cli create-site -e local -s my-site -n My Site \
 
 `crafter-cli sync-from -e local -s editorial -n origin`
 
+To create a group:
+
+`crafter-cli create-group -e local -gn test-group -gd "Description of the group"`
+
+Also, you can create a group by providing a csv file with the group name and description:
+
+`crafter-cli create-group -e local -gi /path/to/group.csv`
+
 You can publish content to the Live or Staging targets (Staging must be enabled to publish to it):
 
 `crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml"`
