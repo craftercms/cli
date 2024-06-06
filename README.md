@@ -30,7 +30,7 @@ To create a group:
 
 `crafter-cli create-group -e local -gn test-group -gd "Description of the group"`
 
-You can bulk import groups by providing a CSV file with the format: group name, group description:
+You can bulk import groups by providing a CSV file with the format: `group name, group description`:
 
 `crafter-cli create-group -e local -gi /path/to/group.csv`
 
