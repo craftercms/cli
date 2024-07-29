@@ -4,31 +4,27 @@ git:
   quiet: true
 language: java
 jdk:
-- openjdk17
+  - openjdk17
 branches:
   only:
-  - develop
-  - support/4.1.x
-  - master
+    - develop
+    - support/4.1.x
+    - support/4.0.x
+    - master
 cache:
   directories:
-  - "$HOME/.m2"
+    - "$HOME/.m2"
 notifications:
-  irc:
-    channels:
-    - chat.freenode.net#craftercms
-    use_notice: true
-    skip_join: true
   slack: craftersoftware:7YiSb41ZG5rfMgiAY7Qgprc7
 before_install:
   - mkdir -p $HOME/.m2
   - cp .travis-settings.xml $HOME/.m2/settings.xml
 install: skip
 script:
-- if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then bash -c  "mvn deploy --settings
-  .travis-settings.xml";  fi
-- if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then bash -c "mvn clean install" ;fi
+  - if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then bash -c "mvn deploy --settings .travis-settings.xml"; fi
+  - if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then bash -c "mvn clean install"; fi
 env:
   global:
-  - secure: hZgq4ILdxWM3NpqavPByRBZx2ozJB50LPWrHbBke1u66kbNB6a7satL8oKxiqsbtqD2CJv+nR9rqL0YLpyqQjl+vYvMVmjirFl3KtqajQhKjDlViJGd+mmkJgo4Z8MY2oZmLj7GmSDWo6RT1pPW11OGMW+1iEDQ58fqPgCyZ+2S1w6IFZFTu7QzDs9KtwfUIpVsrYSt0KiwAexQ8EYKAaF3RUpQO+yQvX5P2SK+7sEVZTH6Tqg92w1IRYTWTGMY/VPiHV0maio0vlZGY9AfRXRsNGjfjM6m2KVn9EeZRKPMwF90thetwdGJuwEXv9BriYkLQSOfRNhdy76SuZNQEj1NXygK9CHReOA1hsQtNk9po9HITudZQCPfZjpHxbOPLx2lYHseKPzky/rF91nRmIyiTRDQmkZIEVA2/Ru1j58s4qBYcAZlfItxM5huAHZAvifM+Mq8lokQ5IBD+MeR40W2oib26ZeG8jp8Hy/w+geDgrJyhGGHSA4865h46romwfFtkFCKP/KuGSRuQPuwvYBelZf6W2Ujbj+dZHP8M/UUig1HOViyvBkoWH3LoQ9C4YCEiTinjkuvIrkM0E1kqoFPmHjIU9uIsvkH7nzxcHyLsIzNLAIsSW/pljmrtbEJasSg/ySikvRZrVql4Fwa0H8BvnwWkNIFBMghxYeyYF9E=
-  - secure: J2RQdQE/wRQCsh5ikGUrQHWriz9UguW7wrad70+5U80JGd2PCwwAWotgIQ95p8pLe/Kh+X+IBI7jBAgN49ZlfJ8L4LJi0smTdTfdoTR/D21qsv73JjykjaPM92JCR+UXu5lem+VTTR6s1gFvDpyDy0BlzlgaILXZ3Kgkky6+aoh6GH3GVf3kmHkrLLKjpEIhCDH6JRFmzbVakZOBJY4JMhtJtktVqaC0Y3TbawcIVLAxYZRmQ7CeQGgTUZE8XTaOaJZlTnlC3cgzuAm8AqDUP2WJaMUpf9dgiaNux6KpcGzPHkl0Pe4tC/9212zfQ59QQDJ3LMXyF/8W7rA9hDShaZpJO2u45e3Y3S5Ov+XBI6foddm9pqQ3Dxhm53r4oVvbHNbSg1JdlJwf2W8hd7kXXCtRBcXWLj+VvXXMaUXeKl5q3aKsybiplaWyzsE4TjpYbTwN7M2Z0+axIMit4QWciQHgxUV0nNJNeDFBTwZdZ/BD5yR4b0RL22B4snLPXw4xlPlHk8wnJ2PaJ55dL/YWKTS81Ek6GEE6PDUiBmZjlNrfB23ZiHcWtl3UaV/I52aN5Wd0LYm8rZyLg2r7oNQPoHVfwA/YsesZAwV43oDVYzIzVFPqoC+FNtV+ThhGmhUkqLtRo/VJYbN0BtqJISp5Q2CjXV1g8z98ut2WLfAy72M=
+   - secure: "hIighxfkHURGfV3t1uz23inImgvJiETKiWwSXAftMT29WPWiKCbcs1AXWaNXf0B/Tpdrv1j4LmKcXBoOaj09BhACKJL82TIbi4oyryN9Xml8mbsjdpzEne9UxSEFw6kw2HdMm91qW5wrCuxPUy2z1JNoMma9n9sejqSRDQgnSZ5/yMMwdqwN0gy6sqP7/2YUoyzjE3r/IRXR4uWtpIpUTskmXHUaXfy5utiJuyOZVLgBFF9IuLH36d2zyt4qm41bza9AZrrU/vmaxdqpBFGeZAy7jvvp64ePqnd6N3LWKZXMSDiYULjKtU9mdwWQbIjar01HT2fPB+1sosL24IeKzovZ1/x4jG2Y3ONInaRWtDx7jMav+bOBd97OF0FuSdX72fmZt4shX5ydqr0/wO6RlNOnZuERHxtCU8YVxjTL5Tr0s7mMThPjq+HMgiyNi7HA8/tK3ZlVirydrPRRA56ugJuYQmcFBjeBlIT7pz2nsc4WtOMZTdE/KOelku5Cni6h3xBImxnvhVLeE0cUnW5T1Vs8MzC+vwpZDNleVL7HBKqL9xCH/kEBcWPzPvFjDPp4UT3DtxdoClZumukfZdygVIWyhS+UZcJoAIr11j34RyfP0sJ9LxEktHz6YBEXsqY2dL56inF/iqTV3d3Kdk1wAcyYD1iTLiHsnAM186074Sk="
+   - secure: "T2KRn0p1E3GHuGnciBEHh0+5Id/1C1rzXPY7IFf7FFfmXbO6REQhSSaol4lAJRg8+faVUrJmruHNpT9Z1rRDm6Dl7jilCjdpUizcHCOzxPB15FA1G6EqZaXzEDEFjR+wTXUyOfyPqL2zq2lR15w5CY6XIyl7FMQmF2RFB9tYOoU2meqctQmJrYC1CkTi19tuzIqqLjFx0UB0HCZyxjyAn/R7Rcma4ZFAzc0oTAO3QXHNhqYF078EHy9sX5tHDlbxZOsi5WhA/8jY2xGA9mXJCY9FvQ4wcLSlVD+uKaEvx0EcbHtg0tGef+DdknF9XUAOTn9iiHznd/XiZgJZusXyGi43S+ulLn6cHTBrprbI+6ihkp0hizIKtJiiSyZAkTc+ftspxWQ1oCMiZlNSV4JMj8UUqMqBy3O5ou/XRfJgkbqzfdIGXqHhhMmLVH5YaR+7qJK7qJUhK6Vp27X+tFKxabIA7NIbVSHA5Nr925evr9u8aI32ViuNsO53uBvslKoyRi7R3euGlX55DfPwSwPlnSweZpt3XW5zt1fhCtV+1+ADGeel1TBYjI/DsD76k7/BDz0NPztdXk2g9QQ3x8w3ClRECjxwUpDvd1wafVDFSPT+OqzbYAPq+EI95A3B6laixseTiALm63gBVDT9Z0YnhiFW9KsQv8yEhxJSscylNvQ="
+
