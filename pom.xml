@@ -117,12 +117,6 @@
 			<groupId>org.apache.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<type>pom</type>
-			<exclusions>
-				<exclusion>
-					<groupId>org.testng</groupId>
-					<artifactId>testng</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- CLI -->
