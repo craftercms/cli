@@ -17,6 +17,7 @@
 package org.craftercms.cli
 
 import org.craftercms.cli.commands.AddEnvironment
+import org.craftercms.cli.commands.group.AddGroupMembers
 import org.craftercms.cli.commands.group.CreateGroup
 import org.craftercms.cli.commands.group.ListGroups
 import org.craftercms.cli.commands.marketplace.CopyPlugin
@@ -30,7 +31,7 @@ import picocli.CommandLine
         name = 'crafter-cli', usageHelpAutoWidth = true,
         versionProvider = VersionProvider.class, mixinStandardHelpOptions = true,
         subcommands = [CommandLine.HelpCommand, AddEnvironment, AddRemote, CreateSite, ListRemotes, SyncFrom, SyncTo,
-                ListSites, CopyPlugin, CreateUser, ListUsers, CreateAccessToken, PublishContent, CreateGroup, ListGroups])
+                ListSites, CopyPlugin, CreateUser, ListUsers, CreateAccessToken, PublishContent, CreateGroup, ListGroups, AddGroupMembers])
 class Main {
 
     static def main(args) {
