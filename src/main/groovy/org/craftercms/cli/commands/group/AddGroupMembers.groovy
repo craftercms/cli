@@ -41,7 +41,7 @@ class AddGroupMembers extends AbstractCommand {
         def response = getGroupIdByName(client, groupName)
 
         if (!response || !response.group) {
-            println "Error retrieving '${groupName}'"
+            println "Error retrieving group '${groupName}'"
             return
         }
 
@@ -51,11 +51,11 @@ class AddGroupMembers extends AbstractCommand {
 
         def result = client.post(path, body)
         if (!result) {
-            println "Failed to add '${users}' to '${groupName}'"
+            println "Failed to add members '${users}' to group '${groupName}'"
             return
         }
 
-        println "The users '${users}' were successfully added to group '${groupName}'"
+        println "Members '${users}' added to group '${groupName}' succesfully"
     }
 
     /**
