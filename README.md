@@ -30,6 +30,14 @@ To create a group:
 
 `crafter-cli create-group -e local -gn test-group -gd "Description of the group"`
 
+It is possible to get a group by name:
+
+`crafter-cli get-group-by-name -e local -gn group-name`
+
+You can also add members to a group (for adding multiple users, separate them by a comma):
+
+`crafter-cli add-group-members -e local -gn test-group -u john-doe`
+
 You can bulk import groups by providing a CSV file with the format: `group name, group description`:
 
 `crafter-cli create-group -e local -gi /path/to/group.csv`
