@@ -31,30 +31,51 @@ class AddGroupMembers extends AbstractCommand {
         addMembers(client, groupName, users)
     }
 
-	/**
-	 * Add one or more users to a group
-	 * @param client HTTPClient object
-	 * @param groupName group name
-	 * @param users list of users to add
-	 */
+    /**
+     * Add one or more users to a group
+     * @param client HTTPClient object
+     * @param groupName group name
+     * @param users list of users to add
+     */
     static def addMembers(client, groupName, users) {
-        def group = GetGroupIDByName.getGroupByName(client, groupName)
+        def response = getGroupIdByName(client, groupName)
 
-        if (!group || !group.group) {
-            println "Group not found"
+        if (!response || !response.group) {
+            println "Error retrieving ${groupName} group"
             return
         }
 
-        def groupId = group.group.id
+        def groupId = response.group.id
         def path = "/studio/api/2/groups/${groupId}/members"
         def body = [usernames: users]
 
         def result = client.post(path, body)
         if (!result) {
-            println "Failed to add members"
+            println "Failed to add ${users} to ${groupName} group"
             return
         }
 
-        println "Members added successfully"
+        println "The following users have been added to the ${groupName} group: ${users}"
+    }
+
+    /**
+     * Get a group by name
+     * @param client HTTPClient object
+     * @param groupName group name
+     */
+    static def getGroupIdByName(client, groupName) {
+        def path = "/studio/api/2/groups/by_name/${groupName}"
+        def result = client.get(path)
+        if (!result) {
+            return
+        }
+
+        if (!result.group) {
+            println "Missing group with name: ${groupName}"
+            return
+        }
+
+        println "Group with ${groupName} has id: ${result.group.id}"
+        return result
     }
 }
