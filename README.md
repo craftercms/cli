@@ -1,5 +1,5 @@
 # Crafter CLI
-Commandline interface to CrafterCMS. Learn more at http://docs.craftercms.org.
+Commandline interface to CrafterCMS. Learn more at https://craftercms.com/docs.
 
 # Examples
 
