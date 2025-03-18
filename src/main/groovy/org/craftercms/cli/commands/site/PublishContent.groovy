@@ -30,16 +30,16 @@ class PublishContent extends AbstractCommand {
 	@CommandLine.Option(names = ['--items'], description = 'The items to publish')
 	String items
 
-	@CommandLine.Option(names = ['--optionalDependencies'], description = 'The optional dependencies')
-	String optionalDependencies
-
 	@CommandLine.Option(names = ['--publishingTarget'], description = 'The publishing target (live, staging)')
 	String publishingTarget
 
 	@CommandLine.Option(names = ['--schedule'], description = 'The schedule to publish.')
 	String schedule
 
-	@CommandLine.Option(names = ['--comment'], description = 'The comment to add')
+	@CommandLine.Option(names = ['--title'], description = 'The title to add to the publish package')
+	String title
+
+	@CommandLine.Option(names = ['--comment'], description = 'The comment to add to the publish package')
 	String comment
 
 	def additionalValidations() {
@@ -52,32 +52,30 @@ class PublishContent extends AbstractCommand {
 		if (publishingTarget != 'live' && publishingTarget != 'staging') {
 			throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Invalid publishing target. Use live or staging')
 		}
+		if (!title) {
+			throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Missing required option title')
+		}
+		if (!comment) {
+			throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Missing required option comment')
+		}
 	}
 
 	def run(client) {
-		// Tokenize items and optionalDependencies
-		def items = this.items.tokenize(',')
-		def optionalDependencies = this.optionalDependencies ? this.optionalDependencies.tokenize(',') : null
+		def pathsList = this.items.tokenize(',').collect { [path: it.trim()] }
 
-		def path = '/studio/api/2/workflow/publish.json'
+		def packagePathUrl = "/studio/api/2/publish/${siteOptions.siteId}/package"
 		def query = [
-			siteId              : siteOptions.siteId,
-			items               : items,
-			optionalDependencies: optionalDependencies,
-			publishingTarget    : publishingTarget,
-			schedule            : schedule,
-			comment             : comment
+			paths           : pathsList,
+			publishingTarget: publishingTarget,
+			schedule        : schedule,
+			title           : title,
+			comment         : comment
 		]
-		def result = client.post(path, query)
-		if (!result) {
-			return
-		}
-		if (schedule) {
-			println(result.response.message)
-			println "The selected content has been submitted to be published to ${publishingTarget} at ${schedule}"
-		} else {
-			println(result.response.message)
-			println "The selected content has been submitted to be published to ${publishingTarget}"
-		}
+		def result = client.post(packagePathUrl, query)
+		if (!result) return
+
+		println result.response.message
+
+		println "The selected publish packageId(${result.packageId}) has been submitted to be published to ${publishingTarget}${schedule ? " at ${schedule}" : ""}"
 	}
 }
