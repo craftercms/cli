@@ -53,10 +53,10 @@ class PublishContent extends AbstractCommand {
 			throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Invalid publishing target. Use live or staging')
 		}
 		if (!title) {
-			throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Missing required option title')
+			title = "Publish package in Project ${siteOptions.siteId}."
 		}
 		if (!comment) {
-			throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Missing required option comment')
+			comment = "Publishing package items: ${items} to target ${publishingTarget}."
 		}
 	}
 
@@ -72,7 +72,9 @@ class PublishContent extends AbstractCommand {
 			comment         : comment
 		]
 		def result = client.post(packagePathUrl, query)
-		if (!result) return
+		if (!result) {
+			return
+		}
 
 		println result.response.message
 
