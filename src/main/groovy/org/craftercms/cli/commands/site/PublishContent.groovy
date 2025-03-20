@@ -72,9 +72,8 @@ class PublishContent extends AbstractCommand {
 			comment         : comment
 		]
 		def result = client.post(packagePathUrl, query)
-		if (!result) {
+		if (!result)
 			return
-		}
 
 		println result.response.message
 
