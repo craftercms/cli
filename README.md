@@ -37,23 +37,17 @@ You can bulk import groups by providing a CSV file with the format: `group name,
 
 You can publish content to the Live or Staging targets (Staging must be enabled to publish to it):
 
-`crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml"`
+`crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml" --title "Publish live" --comment "Publish live comment"`
 
-`crafter-cli publish-content -e local -s editorial --publishingTarget staging --items "/site/website/index.xml"`
+`crafter-cli publish-content -e local -s editorial --publishingTarget staging --items "/site/website/index.xml" --title "Publish staging" --comment "Publish staging comment"`
 
 To publish multiple items, separate them by a comma:
 
-`crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml,/site/website/health/index.xml"`
-
-You can add optional (soft) dependencies to the publish command:
-
-`crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml" --optionalDependencies "/templates/web/pages/category-landing.ftl"`
-
-`crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/entertainment/index.xml,/site/website/articles/2021/1/men-styles-for-winter/index.xml" --optionalDependencies "/templates/web/pages/category-landing.ftl,/templates/web/pages/article.ftl"`
+`crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml,/site/website/health/index.xml" --title "Publish multiple items" --comment "Publish multiple items comment"`
 
 You can schedule content to be published:
 
-`crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml" --schedule "2025-10-31T01:30:00.000-05:00" --comment "My comment"`
+`crafter-cli publish-content -e local -s editorial --publishingTarget live --items "/site/website/index.xml" --schedule "2025-10-31T01:30:00.000-05:00" --title "Publish Schedule" --comment "My comment"`
 
 For a detailed list of commands & arguments run `crafter-cli help`
 
