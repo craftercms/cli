@@ -8,9 +8,7 @@ jdk:
 branches:
     only:
         - develop
-        - support/4.1.x
-        - support/4.0.x
-        - master
+        - support/4.1
 cache:
     directories:
         - "$HOME/.m2"
@@ -25,6 +23,5 @@ script:
     - if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then bash -c "mvn clean install"; fi
 env:
     global:
-        -   secure: "RKIymLxx1swYPpES2yev6xdp54ySWV9PiMFUjaAar3vFVJtrK512NftcNc9vMok9i0PwGAX8CxNXJh6GSZg1kwHQIXNYkEXNfDWzS9YUIEeZi3TADsRNpLLso/lopcBe/DvRcbcUo0U+A0JpfyyHsCOtB6sMbe4gEnC8O96JqZaJk+Qmh6rIcikB0mki71FXcKY63mHJpcGlS2L597BVzuIbbO1eng1Uk/ji2wJhAOZFNtAqrdt7i9YC/8TT7U5b3OT27RstyYhRgJQZHvJadKISaOYdu1hFkdvUIRx7xmDCo+b1XyF6FBbHJgmyw6fqOqmX5uZ1oQjkZxEtYpmMGlYdWifLL1JKlDnG5ATavQha2rQPugy4e2DMxNfWB6Xs7fKtM9wxBDRhk+i1uh4rtqrCh2lL4s6jGI4gqKJ3Vqo2NbeYPM6+D3x7kL8LFlpWG0KMSBAGhUA8ZUDW422jLIVZS3KmjB72WWL0skwwlQ5Gdg8mxIgWUqbKDPwmFI8uMFxz2xRMQs0CbwGKH1UxpxO92Csuud7FlRlXrMv1gNrtzDMhxRXUc3kbZ0S0jULYAm7Av4EbMFBgsW6PrRQdEIe/nufnqE0AsrurXPUZORydJ3YxwmGRDbihWq9j96SaTBxB34t3QwLmDmX1szQuzL6QAixoL7kXfsbjwCbclXo="
-        -   secure: "HiUF2kZ/DphIURe671VrIRG6Nm8Q8szzgNTbLMQBFsbH7DneXTuAXHXqEVOE6xvac2PPPHc5KACfh3LDcJVZbzDCUGnMvy+yEYXBDOKi9wQYOiX5JwsYGdR/0N70oSevUm6pRxqp7VzsCyoasvatMLbBzm6XEq+Bu5SblAfOUuJaEiNYxqr6GMiX12DqkbWe814xi5ch8Z4Db4wFlVpz6jjfKVWiKAwenpFUzbl/pqhDx2RFkyWnpPQmSwaBIdkLkLrwEnTnVo4hKDqXboAq9pgDmGztC7dV4p+xwzGnHCNTJLxhYcRHFgr17/++0yP6HAIcx7h8jt67Kg6C8gtKYhz4ycSVMWKehov4FAwwCtO/GGlSNhAYlp/V1hexGaC+NuaMPQjA6imxc6nyzqefVByLIRNc2fa5px0ZHEtfckisMD+ioxTUZGcQcZYgB5V0143egk3Vui7KSdtwCYd99FbhEXNuDnLKhQKSqlMo2pyHYmg2NbMmUPd09UwJVEacQTwRS6JoOHDmyWxC9McDmQ2o8+jmyQ80TXl9bisJ+kUBSJf5cI4M10kl6uG6AtK15tRClPPC9sr+xvSymnx0cLPqUaabiHwN0S36AGcJPVms/0wIvci3l1UnkpzhP44LjUJ54Rliz3sFt5Xz2wiB0d8Cgh79s0dlYqEkQvaZL+4="
-
+        -   secure: "hG0dbQkpqtwqyrDLbD1mEgFhowCZtaV4MpjWOVOkGs6OPQbFDI4NOrzhQwTjryyCRWPFryWwThAS+x1PS7seb2gGJJbbkPtqmDHvm3lLtwz3vKm4XdHufMe6pqmSUHigGgKAB2mFLjV6SXsOgAZlYgZkEp5cIJhIyMHWI/SvdJE3s2CaOrPs2BaXK/h/LrwHgekuK7zuCvjbwSI0uvEImfKc3YZozfw1QstlOfDWIC+Dg42/yCZ2WW+m58/2hPAvPzyAAlpTyoy2yWK53QiaWvbTUai1YGPSoFonsNKymC5kpUfjWVwFR8ZauEQEge4IinCkxXQtBcX/TGpmAsc9IiKWp/GpMv49npsoJj9RjrC/UtPNwb08GKtdN4z66QaUv+iiPP8/+f90Cg9wmHH+PprsaNO0RtUcxB+0eOXY6BQ8shV9OwFVp0JAOklZu+Ru2GPd4ieRq69I8TBK+iFc955xlBMxh9k8VpbWjpGDGOJzkCuTZR6LOdcailwKFIQj+TZ/UHukYcVcPdISkoRPrIiMKc6Jdbsxrf6n2puM0OaMgodK5ytQn1AQa5JMDDF0hOaEly2AB689pdg8izLSc9/h/IgDINeMePQfpTWwUW9YgdxZsnguuCgd3Q3UTqXaNX2dyadLC4RXIhuDCbKuANFLfGdRECqbusMZHMvy54k="
+        -   secure: "YZEn3G1dUh7FuD4JMB0TyfcXZ6trngvMYp0zy2UvlGt72BeIFhr5mQ7bpsthhD8Ymna1ghsFHh1GBEbkflzkhZip7AH/v55UG0p3XZnq4JtPE3LhLcS7YKW1EKmc3tKBzQv3GJ8KR4wtYsDMwnKfzc643wBvsP7Dh09a1R1UmBYkFhUD3JoDWHfe5f6PcQHsTMztW8tU0Zf8ynNfakmDpoNhWWi/gukKyaqf9SHXlJeFMyvCyhNpIqx89ELzyeTkV2AYlAnGAzKnt8BK/aab9ToNXYbmX2td5zWnG19yfnBrLR45yJZSlgEOyzaLdyMoFhW1I1H9p0N35XAS4s3SZyBBMyg1ZdM1D5gayeQV5eMREQlW6FanPoOcz0iTf+G0YMAqV4FDfRdvQQWIEByn+bLXU3qI8RyxcajzQqfEFrU3HXc0uUbQNy+11JUrunN7Vn/QMW6M5FPN7eeJTilpgx1ycLcLypCQt8dtXC03VApDfpUCfIarse8cAzYW8T8U8ccW+qww7Zng/KhiwUFF1pMyUt8kDlNu97nR2oWvMS2VT5ZYZ88GRvYgTdSfN/eP2cqsfCmzWF1Spp/tMsGQDN6dWNLuJ6cUcyPMCS9QyurLjdIkBUoyV5ZwKyes2KgdC11VQKQp4/1WaNm6UhsAIXJ6lcRA5WBvCZ/LT3pKdQc="
