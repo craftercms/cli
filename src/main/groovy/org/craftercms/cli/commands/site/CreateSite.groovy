@@ -44,7 +44,7 @@ class CreateSite extends AbstractCommand {
 	boolean orphan
 
 	@CommandLine.Option(names = '--singleBranch', description = 'Fetch only the given branch from the remote repository')
-	boolean singleBranch
+	Boolean singleBranch
 
 	@CommandLine.Option(names = '--sandboxBranch', description = 'The name of the branch for the local repository')
 	String sandboxBranch
@@ -52,68 +52,68 @@ class CreateSite extends AbstractCommand {
 	@CommandLine.Option(names = ['--siteParam'], description = "Parameter for the blueprint")
 	Map<String, String> siteParams
 
+
+	@CommandLine.Option(names = ['-sn', '--siteName'], required = false, description = 'The name of the project')
+	String siteName
+
 	def additionalValidations() {
-		if (gitOptions) {
-			gitOptions.validCombination()
+		if (gitOptions.url && blueprint) {
+			throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Cannot specify both --blueprint and --url')
 		}
-		if (!gitOptions || gitOptions.createOption == 'push' && !blueprint) {
-			throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Missing required option blueprint')
+		if (!gitOptions.url && !blueprint) {
+			throw new CommandLine.ParameterException(commandSpec.commandLine(), 'Missing required option blueprint or url')
 		}
 	}
 
 	def run(client) {
 		def params = [
-			site_id            : siteOptions.siteId,
-			name               : siteOptions.siteId, // TODO: Add support for site name in 3.2
-			authentication_type: authAware.authType,
-			create_as_orphan   : orphan,
-			single_branch      : singleBranch,
-			create_option      : gitOptions.createOption
+			siteId         : siteOptions.siteId,
+			name           : siteName ?: siteOptions.siteId,
+			authentication : [type: 'none']
 		]
-		if (gitOptions) {
-			params.create_option = gitOptions.createOption
-			params.use_remote = gitOptions.remote
+		if (blueprint) {
+			params.sourceType = 'blueprint'
+			params.blueprintId = blueprint
+		} else {
+			// No blueprint, so we are creating a site from a remote repository
+			params.sourceType = 'remote'
+			params.remoteUrl = gitOptions.url
 
 			if (gitOptions.remoteName) {
-				params.remote_name = gitOptions.remoteName
-			}
-			if (gitOptions.url) {
-				params.remote_url = gitOptions.url
+				params.remoteName = gitOptions.remoteName
 			}
 			if (gitOptions.remoteBranch) {
-				params.remote_branch = gitOptions.remoteBranch
+				params.remoteBranch = gitOptions.remoteBranch
 			}
-			if (authAware.username) {
-				params.remote_username = authAware.username
+			if (singleBranch) {
+				params.singleBranch = singleBranch
 			}
-			if (authAware.password) {
-				params.remote_password = authAware.password
+			if (orphan) {
+				params.createAsOrphan = orphan
 			}
+
 			if (authAware.token) {
-				params.remote_token = authAware.token
+				params.authentication = [type: 'token', token: authAware.token]
+			} else if (authAware.username && authAware.password) {
+				params.authentication = [type: 'basic', username: authAware.username, password: authAware.password]
+			} else if (authAware.privateKey) {
+				params.authentication = [type: 'key', privateKey: authAware.privateKey.text.trim()]
 			}
-			if (authAware.privateKey) {
-				// trim to avoid issues with empty lines
-				params.remote_private_key = authAware.privateKey.text.trim()
-			}
-		}
-		if (blueprint) {
-			params.blueprint = blueprint
 		}
 		if (sandboxBranch) {
-			params.sandbox_branch = sandboxBranch
+			params.sandboxBranch = sandboxBranch
 		}
 		if (description) {
 			params.description = description
 		}
 		if (siteParams) {
-			params.site_params = siteParams
+			params.siteParams = siteParams
 		}
 
-		def path = '/studio/api/1/services/api/1/site/create.json'
+		def path = '/studio/api/2/sites'
 		def result = client.post(path, params)
 		if (result) {
-			println result.message
+			println result.response.message
 		}
 	}
 

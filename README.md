@@ -20,8 +20,8 @@ Once the environment has been added, you can create projects and sync a remote r
 It is also possible to create a project from a remote repository and later sync it:
 
 ```
-crafter-cli create-site -e local -s my-site -n My Site \
-                        -r --clone -u http://github.com/john/doe/my-site.git -b development \
+crafter-cli create-site -e local -s my-site -sn My Site \
+                        -u http://github.com/john/doe/my-site.git -b development \
                         --username john --key /home/john/private_key
 ```
 
